@@ -19,6 +19,9 @@ namespace game
         public MainWindow()
         {
             InitializeComponent();
+
+            gridLabyrinth.Background = Brushes.Red;
+            Game game = new("lab.txt", gridLabyrinth);
         }
     }
 }
