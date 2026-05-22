@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace game
 {
@@ -13,7 +14,7 @@ namespace game
 
         public Tile(char icon)
         {
-            this.Icon = icon;
+            this.Icon = icon == '.' ? ' ' : icon;
             IsDiscovered = false;
         }
     }

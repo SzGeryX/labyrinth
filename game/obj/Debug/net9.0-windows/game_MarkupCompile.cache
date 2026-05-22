@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\szentjobi.gergo\Documents\labyrinth\game\obj\Debug\net9.0-windows\
+C:\Users\Gergo\Documents\labyrinth\game\obj\Debug\net9.0-windows\
 game
 none
 false
-TRACE;DEBUG;NET;NET9_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-C:\Users\szentjobi.gergo\Documents\labyrinth\game\App.xaml
+TRACE;DEBUG;NET;NET9_0;NETCOREAPP
+C:\Users\Gergo\Documents\labyrinth\game\App.xaml
 11407045341
 
 6-171328851
-200-44685031
+200161758370
 MainWindow.xaml;
 
 False

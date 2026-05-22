@@ -60,17 +60,12 @@ namespace game
 
                     temp.Content = Tiles[i][j].Icon;
 
-                    //temp.HorizontalAlignment = HorizontalAlignment.Center;
-                    //temp.VerticalAlignment = VerticalAlignment.Center;
-                    temp.Background = Brushes.Blue;
-                    temp.HorizontalContentAlignment = HorizontalAlignment.Center;
-                    temp.VerticalContentAlignment = VerticalAlignment.Center;
+                    temp.Padding = new Thickness(0);
+                    temp.Margin = new Thickness(0);
 
-                    temp.Width = 1920 / MapWidth;
-                    temp.Height = 1080 / MapHeight;
+                    temp.FontFamily = new FontFamily("Consolas");
 
-                    //temp.FontSize = 800/MapHeight;
-                    
+                    temp.FontSize = 150;
 
                     map.Children.Add(temp);
 
