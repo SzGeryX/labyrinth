@@ -10,25 +10,57 @@ using System.Windows.Controls.Primitives;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Input;
+using System.Printing;
 
 namespace game
 {
     class Game
     {
+        Random rnd = new Random();
+
         private List<List<Tile>> tiles;
         private Point player;
+        private List<Tile> exits;
         public int MapHeight { get => tiles.Count; }
         public int MapWidth { get => tiles[0].Count; }
+        private Grid gameArea;
+        private int score = 0;
 
 
-        public Game(string name, UniformGrid map)
+        public Game(string name, UniformGrid map, Grid gameArea)
         {
             tiles = readMapFile(name);
-            player = new Point(0, 1);
 
             initMap(map);
 
+            exits = calculateExits();
+
+            Tile rndExit = exits[rnd.Next(exits.Count())];
+
+            player = new Point(Grid.GetColumn(rndExit.Label), Grid.GetRow(rndExit.Label));
+            this.gameArea = gameArea;
+
             colorTileBackgrounds();
+        }
+
+        private List<Tile> calculateExits()
+        {
+            List<Tile> exits = new List<Tile>();
+
+            for (int i = 0; i < MapHeight; i++)
+            {
+                for (int j = 0; j < MapWidth; j++)
+                {
+                    if (tiles[i][j].Directions.Count == 0) continue;
+
+                    if (i == 0 && tiles[i][j].Directions.Contains(game.Directions.North)) exits.Add(tiles[i][j]);
+                    if (i == MapHeight - 1 && tiles[i][j].Directions.Contains(game.Directions.South)) exits.Add(tiles[i][j]);
+                    if (j == 0 && tiles[i][j].Directions.Contains(game.Directions.West)) exits.Add(tiles[i][j]);
+                    if (j == MapWidth - 1 && tiles[i][j].Directions.Contains(game.Directions.East)) exits.Add(tiles[i][j]);
+                }
+            }
+
+            return exits;
         }
 
         private List<List<Tile>> readMapFile(string name)
@@ -112,29 +144,67 @@ namespace game
 
         public void MovePlayer(Key k)
         {
+            if (player.X - 1 < 0 && k == Key.A ||
+                player.X + 1 >= MapWidth && k == Key.D ||
+                player.Y - 1 < 0 && k == Key.W ||
+                player.Y + 1 >= MapHeight && k == Key.S)
+            {
+                if (!exits.Contains(tiles[(int)(player.Y)][(int)(player.X)])) return;
+
+                switch (k)
+                {
+                    case Key.A:
+                        if (!tiles[(int)(player.Y)][(int)(player.X)].Directions.Contains(game.Directions.West)) return;
+                        break;
+                    case Key.D:
+                        if (!tiles[(int)(player.Y)][(int)(player.X)].Directions.Contains(game.Directions.East)) return;
+                        break;
+                    case Key.W:
+                        if (!tiles[(int)(player.Y)][(int)(player.X)].Directions.Contains(game.Directions.North)) return;
+                        break;
+                    case Key.S:
+                        if (!tiles[(int)(player.Y)][(int)(player.X)].Directions.Contains(game.Directions.South)) return;
+                        break;
+                }     
+
+                string messageBoxText = "Do you want to exit the maze?";
+                string caption = "Exit";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Question;
+                MessageBoxResult result;
+
+                result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.No);
+
+                return;
+            }
+
             switch (k)
             {
                 case Key.A:
-                    if (player.X - 1 < 0) return;
                     if (!tiles[(int)(player.Y)][(int)(player.X - 1)].Directions.Contains(game.Directions.East)) return;
                     player.X -= 1;
                     break;
                 case Key.D:
-                    if (player.X + 1 >= MapWidth) return;
                     if (!tiles[(int)(player.Y)][(int)(player.X + 1)].Directions.Contains(game.Directions.West)) return;
                     player.X += 1;
                     break;
                 case Key.W:
-                    if (player.Y - 1 < 0) return;
                     if (!tiles[(int)(player.Y - 1)][(int)(player.X)].Directions.Contains(game.Directions.South)) return;
                     player.Y -= 1;
                     break;
                 case Key.S:
-                    if (player.Y + 1 >= MapHeight) return;
                     if (!tiles[(int)(player.Y + 1)][(int)(player.X)].Directions.Contains(game.Directions.North)) return;
                     player.Y += 1;
                     break;
             }     
+
+            if (tiles[(int)(player.Y)][(int)(player.X)].IsScore && !tiles[(int)(player.Y)][(int)(player.X)].IsScored)
+            {
+                tiles[(int)(player.Y)][(int)(player.X)].IsScored = true;
+                score += 1;
+
+                (gameArea.Children[0] as Label).Content = score;
+            }
 
             colorTileBackgrounds();
         }

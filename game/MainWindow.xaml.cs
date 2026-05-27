@@ -21,7 +21,7 @@ namespace game
         {
             InitializeComponent();
 
-            game = new("lab.txt", gridLabyrinth);
+            game = new("lab.txt", gridLabyrinth, grdGameArea);
         }
 
         private void gridLabyrinth_KeyDown(object sender, KeyEventArgs e)

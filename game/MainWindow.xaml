@@ -8,7 +8,8 @@
         WindowState="Maximized"
         Title="MainWindow" Height="1080" Width="1920"
         KeyDown="gridLabyrinth_KeyDown">
-    <Grid>
+    <Grid x:Name="grdGameArea">
+        <Label FontSize="50" x:Name="lblScoreCounter" Content="0"></Label>
         <UniformGrid x:Name="gridLabyrinth" Height="800">
             
         </UniformGrid>
