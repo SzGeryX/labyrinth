@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Labirintus Dokumentáció</title>
+  </head>
+
+  <body>
+    <header>
+      <h1 id="title">Labirintus - Felhasználói útmutató</h1>
+    </header>
+
+    <div class="container">
+      <div class="language">
+        <button onclick="toggleLanguage()">HU / EN</button>
+      </div>
+
+      <div id="hu">
+        <section>
+          <h2>Játékprogram</h2>
+
+          <h3>Lépések (rövid)</h3>
+          <ol>
+            <li>
+              Indítás: futtasd a játékot (exe vagy index.html a böngészőben).
+            </li>
+            <li>Pálya választás: válassz egy beépített vagy mentett pályát.</li>
+            <li>Játékmenet: mozogj, gyűjts tárgyakat, keresd a kijáratot.</li>
+            <li>Mentés/lezárás: játékmentés és kilépés.</li>
+          </ol>
+
+          <h3>Irányítás (példa)</h3>
+          <ul>
+            <li>Fel: W / Fel nyíl</li>
+            <li>Le: S / Le nyíl</li>
+            <li>Balra: A / Bal nyíl</li>
+            <li>Jobbra: D / Jobb nyíl</li>
+            <li>Pauza: Esc</li>
+          </ul>
+
+          <h3>Gyakori hibák & megoldások</h3>
+          <ul>
+            <li>
+              Nem reagálnak a billentyűk — ellenőrizd, hogy a játékablak
+              fókuszban van.
+            </li>
+            <li>
+              Pálya nem töltődik — nézd meg a konzol/log fájlt, vagy próbáld
+              újra betölteni a pályát.
+            </li>
+            <li>FPS lassú — csökkentsd a látótávolságot/beállításokat.</li>
+          </ul>
+
+          <h3>Rövid példa: egyszerű pálya (ASCII)</h3>
+          <pre>
+            #########
+            #S  #   #
+            # ## # E#
+            #      ##
+            #########
+          </pre>
+          <p>S = Start, E = Exit</p>
+
+          <div class="image-box">[JÁTÉK KÉPE HELYE]</div>
+
+          <div class="tip">
+            💡 Tipp: Jegyezd fel az elágazásokat, vagy használj jelöléseket a
+            pályákon.
+          </div>
+        </section>
+
+        <section>
+          <h2>Szerkesztőprogram</h2>
+
+          <h3>Gyors lépések</h3>
+          <ol>
+            <li>Új pálya: Fájl → Új → válassz méretet (pl. 20x15).</li>
+            <li>Eszközök: ceruza (fal), radír, start/exit jelölő.</li>
+            <li>Mentés: Fájl → Mentés (export .json vagy saját formátum).</li>
+            <li>Tesztelés: Nyomd meg a 'Teszt' gombot a szerkesztőből.</li>
+          </ol>
+
+          <h3>Eszközök és tulajdonságok (példa)</h3>
+          <ul>
+            <li>Fal: blokk típus, ütközés engedélyezett.</li>
+            <li>Start/Exit: pont kezdéshez/véghez.</li>
+            <li>Trigger: esemény, amikor a játékos áthalad.</li>
+          </ul>
+
+          <h3>Mentési példa (.json)</h3>
+          <pre>
+            {
+              "width": 9,
+              "height": 5,
+              "tiles": [
+                "#########",
+                "#S  #   #",
+                "# ## # E#",
+                "#      ##",
+                "#########"
+              ]
+            }
+          </pre>
+
+          <h3>Tippek a szerkesztéshez</h3>
+          <ul>
+            <li>Használj sablonokat kezdő pályához.</li>
+            <li>Rendszeresen ments gyakori változtatáskor.</li>
+            <li>Teszteld a pályát különböző nehézségeken.</li>
+          </ul>
+
+          <div class="image-box">[SZERKESZTŐ KÉPE HELYE]</div>
+
+          <div class="tip">
+            💡 Tipp: Tanuld meg a gyorsbillentyűket (pl. Ctrl+Z visszavonás).
+          </div>
+        </section>
+      </div>
+
+      <div id="en" class="hidden">
+        <section>
+          <h2>Game Application</h2>
+
+          <h3>Steps (short)</h3>
+          <ol>
+            <li>Start the game (exe or open index.html in browser).</li>
+            <li>Select a level or load a saved map.</li>
+            <li>Play: move, collect items, find the exit.</li>
+            <li>Save/quit when finished.</li>
+          </ol>
+
+          <h3>Controls (example)</h3>
+          <ul>
+            <li>Up: W / Arrow Up</li>
+            <li>Down: S / Arrow Down</li>
+            <li>Left: A / Arrow Left</li>
+            <li>Right: D / Arrow Right</li>
+            <li>Pause: Esc</li>
+          </ul>
+
+          <h3>Common issues & fixes</h3>
+          <ul>
+            <li>Keys not working — ensure the game window has focus.</li>
+            <li>Level doesn't load — check console/log or reload the level.</li>
+            <li>Low FPS — lower graphics settings or view distance.</li>
+          </ul>
+
+          <h3>Quick example: simple map (ASCII)</h3>
+          <pre>
+            #########
+            #S  #   #
+            # ## # E#
+            #      ##
+            #########
+          </pre>
+          <p>S = Start, E = Exit</p>
+
+          <div class="image-box">[GAME SCREENSHOT PLACE]</div>
+
+          <div class="tip">
+            💡 Tip: Mark junctions or use breadcrumbs to avoid getting lost.
+          </div>
+        </section>
+
+        <section>
+          <h2>Editor Application</h2>
+
+          <h3>Quick steps</h3>
+          <ol>
+            <li>Create new map: File → New → choose size (e.g. 20x15).</li>
+            <li>Tools: pencil (wall), eraser, start/exit markers.</li>
+            <li>Save: File → Save (export .json or internal format).</li>
+            <li>Test: press 'Test' to run the map from the editor.</li>
+          </ol>
+
+          <h3>Tools & properties (example)</h3>
+          <ul>
+            <li>Wall: blocking tile with collision.</li>
+            <li>Start/Exit: define player start and level exit.</li>
+            <li>Trigger: fires events when player steps on it.</li>
+          </ul>
+
+          <h3>Save example (.json)</h3>
+          <pre>
+            {
+              "width": 9,
+              "height": 5,
+              "tiles": [
+                "#########",
+                "#S  #   #",
+                "# ## # E#",
+                "#      ##",
+                "#########"
+              ]
+            }
+          </pre>
+
+          <h3>Editing tips</h3>
+          <ul>
+            <li>Use templates for base layouts.</li>
+            <li>Keep frequent backups while editing.</li>
+            <li>Test maps with different difficulty settings.</li>
+          </ul>
+
+          <div class="image-box">[EDITOR SCREENSHOT PLACE]</div>
+
+          <div class="tip">💡 Tip: Learn shortcuts (e.g. Ctrl+Z to undo).</div>
+        </section>
+      </div>
+    </div>
+
+    <footer>Labirintus projekt</footer>
+
+    <script>
+      function toggleLanguage() {
+        const hu = document.getElementById("hu");
+
+        const en = document.getElementById("en");
+
+        const title = document.getElementById("title");
+
+        if (hu.classList.contains("hidden")) {
+          hu.classList.remove("hidden");
+
+          en.classList.add("hidden");
+
+          title.innerText = "Labirintus – Felhasználói útmutató";
+        } else {
+          en.classList.remove("hidden");
+
+          hu.classList.add("hidden");
+
+          title.innerText = "Labyrinth – User Guide";
+        }
+      }
+    </script>
+  </body>
+</html>
