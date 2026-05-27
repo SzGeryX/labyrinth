@@ -14,18 +14,18 @@
 
         <StackPanel Margin="7px">
             <Label Content="Magasság:"/>
-            <TextBox/>
+            <TextBox x:Name="magassagBox"/>
 
             <Label Content="Szélesség:"/>
-            <TextBox Margin="0 0 0 20px"/>
+            <TextBox Margin="0 0 0 20px" x:Name="szelessegBox"/>
         
-            <Button Content="Pálya generálása"/>
+            <Button Content="Pálya generálása" Click="Button_Click"/>
 
             <Label Content="Válaszható elemek:" Margin="0 20px 0 0"/>
 
             <WrapPanel x:Name="valaszthatoElemek" />
 
-            <Button Content="Mentés"/>
+            <Button Content="Mentés" Click="Button_Click_1"/>
         </StackPanel>
 
         <ScrollViewer Grid.Column="1">
