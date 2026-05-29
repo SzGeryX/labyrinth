@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\2008a\\source\\repos\\SzGeryX\\labyrinth\\metodusok\\metodusok\\metodusok.csproj",
+      "projectUniqueName": "D:\\Programing\\labirintus\\labyrinth\\metodusok\\metodusok.csproj",
       "projectName": "metodusok",
-      "projectPath": "C:\\Users\\2008a\\source\\repos\\SzGeryX\\labyrinth\\metodusok\\metodusok\\metodusok.csproj",
+      "projectPath": "D:\\Programing\\labirintus\\labyrinth\\metodusok\\metodusok.csproj",
       "packagesPath": "C:\\Users\\2008a\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\2008a\\source\\repos\\SzGeryX\\labyrinth\\metodusok\\metodusok\\obj\\",
+      "outputPath": "D:\\Programing\\labirintus\\labyrinth\\metodusok\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
