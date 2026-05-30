@@ -1,0 +1,11 @@
+﻿{
+  "btnOpenText": "Open file",
+  "btnSaveText": "Save game",
+  "btnChangeLanguageText": "Váltás magyarra",
+  "btnToggleMapShowText": "Show map",
+  "btnToggleMapHideText": "Hide map",
+  "lblScoreText": "Score:",
+  "lblCoordinatesText": "Coordinates:",
+  "lblDiscoveredText": "Discovered:",
+  "lblTimeText": "Time:"
+}

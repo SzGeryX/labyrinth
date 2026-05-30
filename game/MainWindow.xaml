@@ -8,9 +8,76 @@
         WindowState="Maximized"
         Title="MainWindow" Height="1080" Width="1920"
         KeyDown="gridLabyrinth_KeyDown">
+    
     <Grid x:Name="grdGameArea">
-        <Label FontSize="50" x:Name="lblScoreCounter" Content="0"></Label>
-        <UniformGrid x:Name="gridLabyrinth" Height="800">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Orientation="Horizontal" Height="50px" VerticalAlignment="Top" Grid.Column="0" Margin="15">
+                <Button x:Name="btnOpen" Click="BtnOpen_OnClick" Width="100px">Open</Button>
+                <Button x:Name="btnSave" Click="BtnSave_OnClick" Width="100px" Margin="10 0 0 0">Save</Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="50px" VerticalAlignment="Bottom" Grid.Column="0" Margin="15">
+                <Button x:Name="btnChangeLanguage" Click="BtnChangeLanguage_OnClick" Width="100px">Change</Button>
+                <Button x:Name="btnToggleMap" Click="BtnToggleMap_OnClick" Width="100px" Margin="10 0 0 0">Toggle</Button>
+            </StackPanel>
+            
+            <Grid x:Name="grdCompass" Background="White" Grid.Column="3" Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Label x:Name="lblNorthArrow" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="2" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Margin="0">↑</Label>
+                <Label x:Name="lblEastArrow" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="1" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Margin="0">→</Label>
+                <Label x:Name="lblWestArrow" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Margin="0">←</Label>
+                <Label x:Name="lblSouthArrow" Grid.Row="1" Grid.Column="0" Grid.RowSpan="1" Grid.ColumnSpan="2" FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Margin="0">↓</Label>
+                
+            </Grid>
+            
+            <StackPanel x:Name="spScoreBoard" Background="White" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <StackPanel.Resources>
+                        <Style TargetType="Label">
+                            <Setter Property="FontSize" Value="24"></Setter>
+                        </Style>
+                </StackPanel.Resources>
+                
+                <Label x:Name="lblScore">Score</Label> 
+                <Label x:Name="lblCoordinates">Cords</Label> 
+                <Label x:Name="lblDiscovered">Disc</Label> 
+                <Label x:Name="lblTime">Time</Label> 
+            </StackPanel>
+            
+            <Label x:Name="lblMapName" FontSize="32" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+            
+            <StackPanel x:Name="spFinalScoreBoard" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="32"></Setter>
+                    </Style>
+                </StackPanel.Resources>
+                <Label x:Name="lblFinalScore">Final Score</Label> 
+                <Label x:Name="lblFinalDiscovered">Final Disc</Label> 
+                <Label x:Name="lblFinalTime">Final Time</Label> 
+            </StackPanel>
+            
+        </Grid> 
+        
+        <UniformGrid x:Name="grdLabyrinth" Grid.Row="1" Background="Coral">
             
         </UniformGrid>
 
