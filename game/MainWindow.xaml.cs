@@ -41,7 +41,7 @@ namespace game
             btnOpen.Content = currentLanguage.btnOpenText; 
             btnSave.Content = currentLanguage.btnSaveText; 
             btnChangeLanguage.Content = currentLanguage.btnChangeLanguageText; 
-            btnToggleMap.Content = game == null ? currentLanguage.btnToggleMapShowText : game.ShowMap ? currentLanguage.btnToggleMapHideText : currentLanguage.btnToggleMapShowText; 
+            btnToggleMap.Content = game == null ? currentLanguage.btnToggleMapShowText : game.IsMapShown ? currentLanguage.btnToggleMapHideText : currentLanguage.btnToggleMapShowText; 
             lblScore.Content = currentLanguage.lblScoreText; 
             lblCoordinates.Content = currentLanguage.lblCoordinatesText; 
             lblDiscovered.Content = currentLanguage.lblDiscoveredText; 
@@ -64,7 +64,6 @@ namespace game
             ofd.Filter = "txt files (*.txt)|*.txt|Save files (*.SAV*)|*.SAV*";
             ofd.RestoreDirectory = true;
             
-
             if (ofd.ShowDialog() != true) return; 
             
             lblMapName.Content = ofd.SafeFileName;
@@ -79,18 +78,17 @@ namespace game
             
             setLanguage();
 
-            game.readSaveFile("asd.SAV");
         }
 
         private void BtnToggleMap_OnClick(object sender, RoutedEventArgs e)
         {
             if (game == null) return;
             
-            game.ShowMap = !game.ShowMap;
+            game.IsMapShown = !game.IsMapShown;
             
             setLanguage();
             
-            game.colorTileBackgrounds();
+            game.ColorTileBackgrounds();
         }
 
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)
