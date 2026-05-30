@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("metodusok")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f83abad4cbc4de12cf6ee36eb4c6458da3e878a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1fc9439c271ae296dd26593aac9d9e346cb9ab1c")]
 [assembly: System.Reflection.AssemblyProductAttribute("metodusok")]
 [assembly: System.Reflection.AssemblyTitleAttribute("metodusok")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
