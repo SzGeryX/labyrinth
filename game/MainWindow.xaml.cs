@@ -16,12 +16,20 @@ namespace game
     /// </summary>
     public partial class MainWindow : Window
     {
+        Game game;
         public MainWindow()
         {
             InitializeComponent();
 
-            gridLabyrinth.Background = Brushes.Red;
-            Game game = new("lab.txt", gridLabyrinth);
+            game = new("lab.txt", gridLabyrinth);
+        }
+
+        private void gridLabyrinth_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (new List<Key>([Key.W, Key.A, Key.S, Key.D]).Contains(e.Key))
+            {
+                game.MovePlayer(e.Key);
+            }
         }
     }
 }

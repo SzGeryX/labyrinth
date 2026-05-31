@@ -9,19 +9,26 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Input;
 
 namespace game
 {
     class Game
     {
-        public List<List<Tile>> Tiles;
-        public int MapHeight { get => Tiles.Count; }
-        public int MapWidth { get => Tiles[0].Count; }
-        public Game(string name, UniformGrid map) 
-        { 
-            Tiles = readMapFile(name);
+        private List<List<Tile>> tiles;
+        private Point player;
+        public int MapHeight { get => tiles.Count; }
+        public int MapWidth { get => tiles[0].Count; }
+
+
+        public Game(string name, UniformGrid map)
+        {
+            tiles = readMapFile(name);
+            player = new Point(0, 1);
+
             initMap(map);
 
+            colorTileBackgrounds();
         }
 
         private List<List<Tile>> readMapFile(string name)
@@ -37,7 +44,7 @@ namespace game
 
                 foreach (char c in parts)
                 {
-                    temp.Add(new Tile(c)); 
+                    temp.Add(new Tile(c));
                 }
 
                 tiles.Add(temp);
@@ -50,29 +57,86 @@ namespace game
         {
             map.Columns = MapWidth;
             map.Rows = MapHeight;
-            
+
 
             for (int i = 0; i < MapHeight; i++)
             {
                 for (int j = 0; j < MapWidth; j++)
                 {
-                    Label temp = new();
+                    Label current = new Label();
+                    
+                    tiles[i][j].Label = current;
 
-                    temp.Content = Tiles[i][j].Icon;
+                    current.Visibility = Visibility.Hidden;
 
-                    temp.Padding = new Thickness(0);
-                    temp.Margin = new Thickness(0);
+                    current.Content = tiles[i][j].Icon;
 
-                    temp.FontFamily = new FontFamily("Consolas");
+                    current.Padding = new Thickness(0);
+                    current.Margin = new Thickness(0);
 
-                    temp.FontSize = 150;
+                    current.FontFamily = new FontFamily("Consolas");
 
-                    map.Children.Add(temp);
+                    current.FontSize = 150;
 
-                    Grid.SetColumn(temp, j);
-                    Grid.SetRow(temp, i);
+                    map.Children.Add(current);
+
+                    Grid.SetColumn(current, j);
+                    Grid.SetRow(current, i);
                 }
             }
+        }
+
+        private void colorTileBackgrounds()
+        {
+            foreach (List<Tile> row in tiles)
+            {
+                foreach (Tile col in row)
+                {
+                    if (col.Label == null) throw new Exception("Tile without label");
+
+                    if (Grid.GetColumn(col.Label) == player.X && Grid.GetRow(col.Label) == player.Y)
+                    {
+                        col.Label.Background = Brushes.IndianRed;
+                        col.IsDiscovered = true;
+                        col.Label.Visibility = Visibility.Visible;
+                    }
+
+                    if (col.IsDiscovered && !(Grid.GetColumn(col.Label) == player.X && Grid.GetRow(col.Label) == player.Y))
+                    {
+                        col.Label.Visibility = Visibility.Visible;
+                        col.Label.Background = Brushes.Gray;
+                    }
+                }
+            }
+        }
+
+        public void MovePlayer(Key k)
+        {
+            switch (k)
+            {
+                case Key.A:
+                    if (player.X - 1 < 0) return;
+                    if (!tiles[(int)(player.Y)][(int)(player.X - 1)].Directions.Contains(game.Directions.East)) return;
+                    player.X -= 1;
+                    break;
+                case Key.D:
+                    if (player.X + 1 >= MapWidth) return;
+                    if (!tiles[(int)(player.Y)][(int)(player.X + 1)].Directions.Contains(game.Directions.West)) return;
+                    player.X += 1;
+                    break;
+                case Key.W:
+                    if (player.Y - 1 < 0) return;
+                    if (!tiles[(int)(player.Y - 1)][(int)(player.X)].Directions.Contains(game.Directions.South)) return;
+                    player.Y -= 1;
+                    break;
+                case Key.S:
+                    if (player.Y + 1 >= MapHeight) return;
+                    if (!tiles[(int)(player.Y + 1)][(int)(player.X)].Directions.Contains(game.Directions.North)) return;
+                    player.Y += 1;
+                    break;
+            }     
+
+            colorTileBackgrounds();
         }
     }
 }
