@@ -168,7 +168,14 @@ namespace game
             
             map.Columns = MapWidth;
             map.Rows = MapHeight;
+
+            double fontWidthToHeight = 0.55;
             
+            double fontSize = Math.Min(map.ActualWidth / MapWidth, map.ActualHeight / (MapHeight * fontWidthToHeight)); // Balogh David <3
+
+            map.Width = fontSize * MapWidth * fontWidthToHeight;
+            map.Height = fontSize * MapHeight;
+
             for (int i = 0; i < MapHeight; i++)
             {
                 for (int j = 0; j < MapWidth; j++)
@@ -177,16 +184,24 @@ namespace game
                     
                     tiles[i][j].Label = current;
 
+
+                    current.Width = fontSize * fontWidthToHeight;
+                    current.Height = fontSize;
+                    
+                    current.HorizontalContentAlignment = HorizontalAlignment.Center;
+                    current.VerticalContentAlignment = VerticalAlignment.Center;
+
                     current.Visibility = Visibility.Hidden;
 
+                    current.FontFamily = new FontFamily("Consolas");
+                    current.FontSize = fontSize;
+                    
                     current.Content = tiles[i][j].Icon;
 
                     current.Padding = new Thickness(0);
                     current.Margin = new Thickness(0);
 
-                    current.FontFamily = new FontFamily("Consolas");
 
-                    current.FontSize = 150;
 
                     map.Children.Add(current);
 
