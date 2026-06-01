@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -36,9 +37,54 @@ namespace LabirintusSzerkeszto_projekt
             '╔'
         };
 
+        char[] balraNyit =
+        {
+            '═',
+            '╬',
+            '╣',
+            '╗',
+            '╝',
+            '╦',
+            '╩'
+        };
+
+        char[] jobbraNyit =
+        {
+            '═',
+            '╬',
+            '╠',
+            '╔',
+            '╚',
+            '╦',
+            '╩'
+        };
+
+        char[] felfeleNyit =
+        {
+            '║',
+            '╬',
+            '╣',
+            '╠',
+            '╚',
+            '╝',
+            '╩'
+        };
+
+        char[] lefeleNyit =
+        {
+            '║',
+            '╬',
+            '╣',
+            '╠',
+            '╔',
+            '╗',
+            '╦'
+        };
+
         private int palyaSzelesseg;
         private int palyaMagassag;
         private char[,] palya;
+        private bool angolNyelv = false;
 
         private char valasztottElem = '.';
         public MainWindow()
@@ -104,6 +150,9 @@ namespace LabirintusSzerkeszto_projekt
                     gomb.Width = 30;
                     gomb.Height = 30;
                     gomb.FontSize = 20;
+                    gomb.Margin = new Thickness(0);
+                    gomb.Padding = new Thickness(0);
+                    gomb.BorderThickness = new Thickness(0);
 
                     gomb.Click += PalyaMezoKattintas;
                     gomb.Tag = new Point(x, y);
@@ -115,8 +164,18 @@ namespace LabirintusSzerkeszto_projekt
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            int szelesseg = int.Parse(szelessegBox.Text);
-            int magassag = int.Parse(magassagBox.Text);
+            if (string.IsNullOrWhiteSpace(szelessegBox.Text) || string.IsNullOrWhiteSpace(magassagBox.Text)) {
+                MessageBox.Show(Szoveg("Add meg a pálya szélességét és magasságát!", "Please enter the map width and height!"));
+
+                return;
+            }
+
+            if (!int.TryParse(szelessegBox.Text, out int szelesseg) || !int.TryParse(magassagBox.Text, out int magassag))
+            {
+                MessageBox.Show(Szoveg("A szélesség és magasság csak szám lehet!",
+           "Width and height must be numbers!"));
+                return;
+            }
 
             PalyaLetrehozasa(szelesseg, magassag);
             PalyaKirajzolasa();
@@ -136,16 +195,29 @@ namespace LabirintusSzerkeszto_projekt
             gomb.Content = valasztottElem;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Mentes(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
 
-            if(sfd.ShowDialog() != true)
+            if (!VanKincsesSzoba())
             {
+                MessageBox.Show(Szoveg("Nincs kincses szoba!", "No treasure room found!"));
                 return;
             }
 
+            if (!VanKijarat())
+            {
+                MessageBox.Show(Szoveg("Nincs kijárat!", "No exit found!"));
+                return;
+            }
+
+            SaveFileDialog sfd = new SaveFileDialog();
+
             sfd.Filter = "Text File (*.txt)|*.txt";
+
+            if (sfd.ShowDialog() != true)
+            {
+                return;
+            }
 
             List<string> sorok = new List<string>();
 
@@ -162,6 +234,116 @@ namespace LabirintusSzerkeszto_projekt
             }
 
             File.WriteAllLines(sfd.FileName, sorok);
+        }
+
+        private bool VanKincsesSzoba()
+        {
+            for (int y = 0; y < palyaMagassag; y++)
+            {
+
+                for (int x = 0; x < palyaSzelesseg; x++)
+                {
+                    if (palya[y, x] == '█')
+                    {
+                        return true;
+                    }
+                }
+
+            }
+            return false;
+        }
+
+        private bool VanKijarat()
+        {
+            
+            for (int y = 0;y < palyaMagassag; y++)
+            {
+                if (balraNyit.Contains(palya[y, 0]))
+                {
+                    return true;
+                }
+
+                if (jobbraNyit.Contains(palya[y, palyaSzelesseg - 1]))
+                {
+                    return true;
+                }
+            }
+
+            for (int x =0; x < palyaSzelesseg; x++)
+            {
+                if (felfeleNyit.Contains(palya[0, x]))
+                {
+                    return true;
+                }
+
+                if (lefeleNyit.Contains(palya[palyaMagassag - 1, x]))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+
+        }
+
+        private void PalyaBetoltese(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.Filter = "Text File (*.txt)|*.txt";
+
+            if (ofd.ShowDialog() != true)
+            {
+                return;
+            }
+
+            string[] sorok = File.ReadAllLines(ofd.FileName);
+
+            palyaMagassag = sorok.Length;
+            palyaSzelesseg = sorok[0].Length;
+
+            palya = new char[palyaMagassag, palyaSzelesseg];
+
+            for (int y = 0; y < palyaMagassag; y++)
+            {
+                for (int x = 0; x < palyaSzelesseg; x++)
+                {
+                    palya[y, x] = sorok[y][x];
+                }
+            }
+
+            PalyaKirajzolasa();
+        }
+
+        private void NyelvValtas(object sender, RoutedEventArgs e)
+        {
+            angolNyelv = !angolNyelv;
+
+            if (angolNyelv)
+            {
+                ujPalyaBtn.Content = "Create Map";
+                mentesBtn.Content = "Save";
+                palyaBetoltesBtn.Content = "Load";
+                NyelvGomb.Content = "Magyar";
+
+                szelessegLb.Content = "Width:";
+                magassagLb.Content = "Height:";
+            }
+            else
+            {
+                ujPalyaBtn.Content = "Új pálya";
+                mentesBtn.Content = "Mentés";
+                palyaBetoltesBtn.Content = "Betöltés";
+                NyelvGomb.Content = "English";
+
+                szelessegLb.Content = "Szélesség:";
+                magassagLb.Content = "Magasság:";
+            }
+        }
+
+        private string Szoveg(string magyar, string angol)
+        {
+            return angolNyelv ? angol : magyar;
         }
     }
 }

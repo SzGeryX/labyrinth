@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LabirintusSzerkeszto_projekt"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Pálya szerkesztő" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200px"/>
@@ -13,19 +13,26 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Margin="7px">
-            <Label Content="Magasság:"/>
+            <Button Name="NyelvGomb"
+                    Content="English"
+                    Click="NyelvValtas"
+                    Width="50px"
+                    />
+            
+            <Label Content="Magasság:" x:Name="magassagLb"/>
             <TextBox x:Name="magassagBox"/>
 
-            <Label Content="Szélesség:"/>
+            <Label Content="Szélesség:" x:Name="szelessegLb"/>
             <TextBox Margin="0 0 0 20px" x:Name="szelessegBox"/>
         
-            <Button Content="Pálya generálása" Click="Button_Click"/>
+            <Button Content="Pálya generálása" Click="Button_Click" x:Name="ujPalyaBtn"/>
+            <Button Content="Pálya betöltése" Margin="0 20px 0 0" Click="PalyaBetoltese" x:Name="palyaBetoltesBtn"/>
 
             <Label Content="Válaszható elemek:" Margin="0 20px 0 0"/>
 
             <WrapPanel x:Name="valaszthatoElemek" />
 
-            <Button Content="Mentés" Click="Button_Click_1"/>
+            <Button Content="Mentés" Click="Mentes" x:Name="mentesBtn" Margin="0 10px 0 0"/>
         </StackPanel>
 
         <ScrollViewer Grid.Column="1">
