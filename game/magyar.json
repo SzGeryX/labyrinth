@@ -1,0 +1,11 @@
+﻿{
+   "btnOpenText": "File megnyitása",
+   "btnSaveText": "Játék mentése",
+   "btnChangeLanguageText": "Switch to English",
+   "btnToggleMapShowText": "Térkép megjelenítése",
+   "btnToggleMapHideText": "Térkép elrejtése",
+   "lblScoreText": "Pontszám:",
+   "lblCoordinatesText": "Koordináták:",
+   "lblDiscoveredText": "Felfedezett:",
+   "lblTimeText": "Idő:"
+}

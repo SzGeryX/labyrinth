@@ -15,6 +15,7 @@ namespace game
         West,
         East
     }
+    
 
 
     class Tile
@@ -22,6 +23,8 @@ namespace game
         public char Icon { get; }
         public bool IsDiscovered { get; set; }
         public bool IsUsable { get => Icon != ' '; }
+        public bool IsScore { get => Icon == '█'; }
+        public bool IsScored { get; set; }
 
         public Label? Label;
 
@@ -35,8 +38,9 @@ namespace game
             this.Directions = calculateDirections();
 
             IsDiscovered = false;
-
+            IsScored = false;
         }
+
         private List<Directions> calculateDirections() {
             switch (Icon) 
             {
