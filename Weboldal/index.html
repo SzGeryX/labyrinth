@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css" />
-    <title>Labirintus Dokumentáció</title>
+    <title id="webTitle">Labirintus Dokumentáció</title>
   </head>
 
   <body>
@@ -21,14 +21,25 @@
         <section>
           <h2>Játékprogram</h2>
 
-          <h3>Lépések (rövid)</h3>
+          <h3>Lépések</h3>
           <ol>
+            <li>Indítás: futtasd a játékot (game.sln).</li>
             <li>
-              Indítás: futtasd a játékot (exe vagy index.html a böngészőben).
+              Pálya betöltése: kattints a fájl megnyitása gombra, és válassz egy
+              pályát.
             </li>
-            <li>Pálya választás: válassz egy beépített vagy mentett pályát.</li>
-            <li>Játékmenet: mozogj, gyűjts tárgyakat, keresd a kijáratot.</li>
-            <li>Mentés/lezárás: játékmentés és kilépés.</li>
+            <li>
+              Játékmenet: mozogj a nyilakkal, vagy a W, A, S, D billentyűkkel,
+              térképezd fel a pályát és keresd a termeket, kijáratokat.
+            </li>
+            <li>
+              Ha megvan az összes terem, akkor az egyik kijáraton hagyd el a
+              pályát.
+            </li>
+            <li>
+              Ha szeretnéd, mentheted a játékot a játék mentése gombra
+              kattintva.
+            </li>
           </ol>
 
           <h3>Irányítás (példa)</h3>
@@ -37,84 +48,72 @@
             <li>Le: S / Le nyíl</li>
             <li>Balra: A / Bal nyíl</li>
             <li>Jobbra: D / Jobb nyíl</li>
-            <li>Pauza: Esc</li>
           </ul>
 
-          <h3>Gyakori hibák & megoldások</h3>
+          <h3>További lehetőségek</h3>
           <ul>
             <li>
-              Nem reagálnak a billentyűk — ellenőrizd, hogy a játékablak
-              fókuszban van.
+              Nyelvezet: a játékban válthatsz magyar és angol nyelv között egy
+              kattintásra.
             </li>
             <li>
-              Pálya nem töltődik — nézd meg a konzol/log fájlt, vagy próbáld
-              újra betölteni a pályát.
+              Pálya: ha szeretnéd, leleplezheted a pályát, hogy lásd a teljes
+              térképet.
             </li>
-            <li>FPS lassú — csökkentsd a látótávolságot/beállításokat.</li>
+            <li>
+              A jobb fent található nyilak azt mutatják, hogy melyik irányba
+              lehet mozogni.
+            </li>
           </ul>
 
           <h3>Rövid példa: egyszerű pálya (ASCII)</h3>
           <pre>
-            #########
-            #S  #   #
-            # ## # E#
-            #      ##
-            #########
+            .....╔══════╗...........
+            ════╗║......║......█....
+            .╔══╬╝..╔═══╣...╗..║....
+            .║..║...║...╚═╦═╝╚╦╝....
+            .╚╦═╩═══╣.....║...║.....
+            ..╚══...║.....╚═══╝.....
           </pre>
-          <p>S = Start, E = Exit</p>
 
-          <div class="image-box">[JÁTÉK KÉPE HELYE]</div>
+          <p>█ = terem, . = üres tér</p>
 
-          <div class="tip">
-            💡 Tipp: Jegyezd fel az elágazásokat, vagy használj jelöléseket a
-            pályákon.
+          <div class="image-box">
+            <img src="kepek/jatek-1.png" alt="Játék képe" />
+            <img src="kepek/jatek-2.png" alt="Játék képe" />
+            <img src="kepek/jatek-3.png" alt="Játék képe" />
           </div>
         </section>
 
         <section>
           <h2>Szerkesztőprogram</h2>
 
-          <h3>Gyors lépések</h3>
+          <h3>Lépések</h3>
           <ol>
-            <li>Új pálya: Fájl → Új → válassz méretet (pl. 20x15).</li>
-            <li>Eszközök: ceruza (fal), radír, start/exit jelölő.</li>
-            <li>Mentés: Fájl → Mentés (export .json vagy saját formátum).</li>
-            <li>Tesztelés: Nyomd meg a 'Teszt' gombot a szerkesztőből.</li>
+            <li>
+              Indítás: futtasd a szerkesztőt (LabirintusSzerkeszto-projekt).
+            </li>
+            <li>
+              Pálya generálása: a magasság és a szélesség megadása után a pálya
+              generálása gombra kattintva létrejön egy üres térkép.
+            </li>
+            <li>
+              Pálya szerkesztése: a gombokra kattintva módosíthatod a pályát a
+              választható elemekkel.
+            </li>
+            <li>Ha kész a pálya, elmentheted TXT-fájlként.</li>
           </ol>
-
-          <h3>Eszközök és tulajdonságok (példa)</h3>
-          <ul>
-            <li>Fal: blokk típus, ütközés engedélyezett.</li>
-            <li>Start/Exit: pont kezdéshez/véghez.</li>
-            <li>Trigger: esemény, amikor a játékos áthalad.</li>
-          </ul>
-
-          <h3>Mentési példa (.json)</h3>
-          <pre>
-            {
-              "width": 9,
-              "height": 5,
-              "tiles": [
-                "#########",
-                "#S  #   #",
-                "# ## # E#",
-                "#      ##",
-                "#########"
-              ]
-            }
-          </pre>
 
           <h3>Tippek a szerkesztéshez</h3>
           <ul>
-            <li>Használj sablonokat kezdő pályához.</li>
-            <li>Rendszeresen ments gyakori változtatáskor.</li>
-            <li>Teszteld a pályát különböző nehézségeken.</li>
+            <li>Alakíts ki zsákutcákat, a nehezebb játékmenetért.</li>
+            <li>Akár több termet / kijáratot is beletehetsz egy pályába.</li>
           </ul>
 
-          <div class="image-box">[SZERKESZTŐ KÉPE HELYE]</div>
-
-          <div class="tip">
-            💡 Tipp: Tanuld meg a gyorsbillentyűket (pl. Ctrl+Z visszavonás).
+          <div class="image-box">
+            <img src="kepek/szerkeszto-1.png" alt="Szerkesztő képe" />
+            <img src="kepek/szerkeszto-2.png" alt="Szerkesztő képe" />
+            <img src="kepek/szerkeszto-3.png" alt="Szerkesztő képe" />
           </div>
         </section>
       </div>
@@ -123,12 +122,13 @@
         <section>
           <h2>Game Application</h2>
 
-          <h3>Steps (short)</h3>
+          <h3>Steps</h3>
           <ol>
-            <li>Start the game (exe or open index.html in browser).</li>
-            <li>Select a level or load a saved map.</li>
-            <li>Play: move, collect items, find the exit.</li>
-            <li>Save/quit when finished.</li>
+            <li>Start: run the game (game.sln).</li>
+            <li>Load a map: click the Open File button and select a map.</li>
+            <li>Gameplay: move using the arrow keys or the W, A, S, D keys, explore the map and find the rooms and exits.</li>
+            <li>Once all rooms have been found, leave the map through one of the exits.</li>
+            <li>If you wish, you can save your progress by clicking the Save Game button.</li>
           </ol>
 
           <h3>Controls (example)</h3>
@@ -137,102 +137,80 @@
             <li>Down: S / Arrow Down</li>
             <li>Left: A / Arrow Left</li>
             <li>Right: D / Arrow Right</li>
-            <li>Pause: Esc</li>
           </ul>
 
-          <h3>Common issues & fixes</h3>
+          <h3>Additional Features</h3>
           <ul>
-            <li>Keys not working — ensure the game window has focus.</li>
-            <li>Level doesn't load — check console/log or reload the level.</li>
-            <li>Low FPS — lower graphics settings or view distance.</li>
+            <li>Language: you can switch between Hungarian and English with a single click.</li>
+            <li>Map: if you want, you can reveal the entire map to see the full layout.</li>
+            <li>The arrows in the top-right corner indicate the directions in which movement is possible.</li>
           </ul>
 
-          <h3>Quick example: simple map (ASCII)</h3>
+          <h3>Short Example: Simple Map (ASCII)</h3>
           <pre>
-            #########
-            #S  #   #
-            # ## # E#
-            #      ##
-            #########
-          </pre>
-          <p>S = Start, E = Exit</p>
+            .....╔══════╗...........
+            ════╗║......║......█....
+            .╔══╬╝..╔═══╣...╗..║....
+            .║..║...║...╚═╦═╝╚╦╝....
+            .╚╦═╩═══╣.....║...║.....
+            ..╚══...║.....╚═══╝.....
+          </pre>  
 
-          <div class="image-box">[GAME SCREENSHOT PLACE]</div>
+          <p>█ = room, . = empty space</p>
 
-          <div class="tip">
-            💡 Tip: Mark junctions or use breadcrumbs to avoid getting lost.
+          <div class="image-box">
+            <img src="kepek/jatek-1.png" alt="Game screenshot" />
+            <img src="kepek/jatek-2.png" alt="Game screenshot" />
+            <img src="kepek/jatek-3.png" alt="Game screenshot" />
           </div>
         </section>
 
         <section>
           <h2>Editor Application</h2>
 
-          <h3>Quick steps</h3>
+          <h3>Steps</h3>
           <ol>
-            <li>Create new map: File → New → choose size (e.g. 20x15).</li>
-            <li>Tools: pencil (wall), eraser, start/exit markers.</li>
-            <li>Save: File → Save (export .json or internal format).</li>
-            <li>Test: press 'Test' to run the map from the editor.</li>
+            <li>Start: run the editor (LabirintusSzerkeszto-project).</li>
+            <li>Generate a map: after entering the height and width, click the Generate Map button to create an empty map.</li>
+            <li>Edit the map: click the available buttons to modify the map using the selectable elements.</li>
+            <li>Once the map is finished, it can be saved as a TXT-file.</li>
           </ol>
 
-          <h3>Tools & properties (example)</h3>
+          <h3>Editing Tips</h3>
           <ul>
-            <li>Wall: blocking tile with collision.</li>
-            <li>Start/Exit: define player start and level exit.</li>
-            <li>Trigger: fires events when player steps on it.</li>
+            <li>Create dead ends to make the gameplay more challenging.</li>
+            <li>You can add multiple rooms and exits to a map.</li>
           </ul>
 
-          <h3>Save example (.json)</h3>
-          <pre>
-            {
-              "width": 9,
-              "height": 5,
-              "tiles": [
-                "#########",
-                "#S  #   #",
-                "# ## # E#",
-                "#      ##",
-                "#########"
-              ]
-            }
-          </pre>
-
-          <h3>Editing tips</h3>
-          <ul>
-            <li>Use templates for base layouts.</li>
-            <li>Keep frequent backups while editing.</li>
-            <li>Test maps with different difficulty settings.</li>
-          </ul>
-
-          <div class="image-box">[EDITOR SCREENSHOT PLACE]</div>
-
-          <div class="tip">💡 Tip: Learn shortcuts (e.g. Ctrl+Z to undo).</div>
+          <div class="image-box">
+            <img src="kepek/szerkeszto-1.png" alt="Editor screenshot" />
+            <img src="kepek/szerkeszto-2.png" alt="Editor screenshot" />
+            <img src="kepek/szerkeszto-3.png" alt="Editor screenshot" />
+          </div>
         </section>
       </div>
     </div>
 
-    <footer>Labirintus projekt</footer>
-
     <script>
       function toggleLanguage() {
         const hu = document.getElementById("hu");
-
         const en = document.getElementById("en");
-
         const title = document.getElementById("title");
+        const webTitle = document.getElementById("webTitle");
 
         if (hu.classList.contains("hidden")) {
+
           hu.classList.remove("hidden");
-
           en.classList.add("hidden");
-
           title.innerText = "Labirintus – Felhasználói útmutató";
+          webTitle.innerText = "Labirintus Dokumentáció";
+
         } else {
+
           en.classList.remove("hidden");
-
           hu.classList.add("hidden");
-
           title.innerText = "Labyrinth – User Guide";
+          webTitle.innerText = "Labyrinth Documentation";
         }
       }
     </script>
